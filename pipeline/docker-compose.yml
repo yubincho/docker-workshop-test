@@ -2,7 +2,7 @@
 services:
   pgdatabase:
     image: postgres:18
-    # container_name: pgdatabase
+    # container_name: 
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root

@@ -12,5 +12,7 @@ COPY "pyproject.toml" "uv.lock" ".python-version" ./
 
 RUN uv sync --locked
 
-COPY ingest_data.py .
-ENTRYPOINT ["python", "ingest_data.py"]
+COPY df_zone.py .
+COPY taxi_zone_lookup.csv .
+
+ENTRYPOINT ["python", "df_zone.py"]
