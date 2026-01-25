@@ -12,7 +12,10 @@ COPY "pyproject.toml" "uv.lock" ".python-version" ./
 
 RUN uv sync --locked
 
+# ✅ 스크립트 2개 모두 복사
+COPY ingest_data.py .
 COPY df_zone.py .
 COPY taxi_zone_lookup.csv .
 
-ENTRYPOINT ["python", "df_zone.py"]
+ENTRYPOINT ["python"]
+CMD ["ingest_data.py"]

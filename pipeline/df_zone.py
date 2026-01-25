@@ -24,28 +24,23 @@ def run(pg_user, pg_pass, pg_host, pg_port, pg_db, target_table, csv_path):
     df.columns = [c.strip().lower() for c in df.columns]  # locationid, borough, zone, service_zone
 
     # 3) Postgres 연결
-    # engine = create_engine("postgresql+psycopg2://root:root@localhost:5432/ny_taxi")
     engine = create_engine(f"postgresql+psycopg2://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}")
 
-    # 4) 적재 (테이블이 이미 있으니 append)
-    # df.to_sql("zones", engine, schema="public", if_exis
-    # ts="replace", index=False)   
-    #df.to_sql(name="zones", engine, if_exists="replace") # 강의
-    df.to_sql(target_table, engine, schema="public", if_exists="append", index=False)
 
-    # 데이터 잘 주입됐는지 확인
-    with engine.connect() as conn:
-        info = conn.execute(text("SELECT current_database(), inet_server_addr(), inet_server_port()")).fetchone()
-        print("DB info:", info)
-        cnt = conn.execute(text("SELECT COUNT(*) FROM public.zones")).scalar()
+    # ✅ 트랜잭션 시작 (블록 끝나면 commit)
+    with engine.begin() as conn:
+        # (선택) 현재 연결 정보 출력
+        db_info = conn.execute(text("SELECT current_database(), inet_server_addr(), inet_server_port()")).fetchone()
+        print("DB info:", db_info)
+
+        # ✅ 테이블 없으면 자동 생성 + 데이터 INSERT
+        df.to_sql(target_table, con=conn, schema="public", if_exists="append", index=False)
+
+        # ✅ 같은 트랜잭션 안에서 바로 검증
+        cnt = conn.execute(text(f"SELECT COUNT(*) FROM public.{target_table}")).scalar()
         print("DB rows:", cnt)
 
     print("Inserted rows:", len(df))
-    print("DB rows:", cnt)
-
-
-import os
-print("RUNNING FILE:", os.path.basename(__file__))
 
 
 if __name__ == '__main__':
