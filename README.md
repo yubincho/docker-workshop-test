@@ -25,7 +25,7 @@ Zoom 강의 시청 → 실습 → Homework 제출 → 코드/노트 정리까지
 👉 My Notes: [Data Engineering Zoomcamp - Study Notes](https://fossil-howler-1c1.notion.site/2f0af976847b80c3a1b0e6712314817e)
 
 
-<br><br>
+<br><br><br>
 
 
 ## 📝 Homework 제출 기록
