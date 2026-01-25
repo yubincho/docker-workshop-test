@@ -16,7 +16,7 @@ Zoom 강의 시청 → 실습 → Homework 제출 → 코드/노트 정리까지
 - [ ] Module 5: Batch Processing (Spark)
 - [ ] Module 6: Streaming
 - [ ] Final Project
-- [ ] 
+
 
 <br><br>
 
@@ -37,6 +37,8 @@ Zoom 강의 시청 → 실습 → Homework 제출 → 코드/노트 정리까지
 | 1 | Docker & Terraform | ✅ Done | [Notion](https://www.notion.so/Data-Enginnering-Zoom-Camp-2ede2f767b4880dd9f21fdd49a7f938b) |
 
 > 숙제 제출 링크 / 캡처 이미지 / 실행 결과는 위 노션 페이지에 업데이트합니다.
+
+<br><br><br>
 
 
 
